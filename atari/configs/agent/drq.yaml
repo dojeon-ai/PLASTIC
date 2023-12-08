@@ -1,0 +1,83 @@
+# defaults
+type: 'rainbow'
+num_timesteps: 100000 # 100k
+total_optimize_steps: None
+obs_shape: None
+action_size: None
+
+aug_types: [random_shift, intensity]
+mask_ratio: 0.0
+aug_target: True
+
+buffer: 
+    type: 'per_buffer'
+    size: 100000
+    n_step: 10
+    prior_exp: 0.5 # ω
+    prior_weight_scheduler: # β
+        initial_value: 0.4
+        final_value: 1.0
+        step_size: None  # (num_timesteps - min_buffer_size) * optimize_per_step
+
+optimizer:
+    type: 'adam'
+    lr: 0.0001414 # sqrt(2)
+    weight_decay: 0.0
+    betas: [0.9, 0.999]
+    eps: 0.00015
+
+#####################
+# exploration
+eps_scheduler: # β
+    initial_value: 1.0
+    final_value: 0.0
+    step_size: 1.0
+
+noise_scheduler:
+    initial_value: 1.0
+    final_value: 1.0
+    step_size: 98000
+
+exploration_model: 'target'
+
+######################
+# optimization
+min_buffer_size: 2000
+optimize_per_env_step: 2 # optimization step per frequency
+
+train_online_mode: 'train'
+train_target_mode: 'train'
+
+# c51
+v_min: -10
+v_max: 10
+
+double: True
+gamma: 0.99
+batch_size: 32
+clip_grad_norm: 10
+target_tau: 0.99
+update_state_dict: False
+
+# reset
+reset_per_optimize_step: -1 
+reset_target: True
+reset_type: 'llf'
+reset_weight_type: 'random' # ['original', 'random']
+shrink_perturb: False
+shrink_perturb_alpha: 0.6
+
+#######################
+# evaluation
+# frequencies are based on environmental step
+# -1 accounts for not using it
+evaluate_freq: 200    # evaluate metric (e.g., fisher diagonal)
+eval_eigen: False
+rollout_freq: 100000  # trajectory rollout
+rollout_model: 'target'
+eval_eps: 0.001
+num_eval_trajectories: 100
+plot_histogram: False
+
+# logging
+log_freq: 1000

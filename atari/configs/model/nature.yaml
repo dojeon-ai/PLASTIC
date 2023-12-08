@@ -1,0 +1,4 @@
+defaults:
+- backbone: nature
+- head: identity
+- policy: rainbow_d512_std05

@@ -1,0 +1,7 @@
+type: 'atari'
+game: 'pong'
+frame_skip: 4
+frame: 4
+horizon: 27000
+grayscale: True
+seed: None
