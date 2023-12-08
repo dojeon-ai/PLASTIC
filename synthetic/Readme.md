@@ -33,7 +33,7 @@ python output_adaptation.py
 
 To test the PLASTIC for output plasticity, run
 ```
-python output_adaptation.py --optimizer_type=sam --backbone_norm=ln --policy_reset=True 
+python output_adaptation.py --optimizer_type=sam --backbone_norm=ln --policy_reset=True --policy_crelu=True
 ```
 
 
